@@ -8,7 +8,7 @@ import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import { createConnection } from 'typeorm';
+import { DataSource } from 'typeorm';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import { dbConnection } from '@databases';
 import { Routes } from '@interfaces/routes.interface';
@@ -46,7 +46,11 @@ class App {
   }
 
   private connectToDatabase() {
-    createConnection(dbConnection);
+    const connection = new DataSource(dbConnection);
+    connection
+      .initialize()
+      .then(() => logger.info('Database connected successfully'))
+      .catch(error => logger.error(error));
   }
 
   private initializeMiddlewares() {
@@ -70,7 +74,7 @@ class App {
     const options = {
       swaggerDefinition: {
         info: {
-          title: 'REST API',
+          title: 'Blog REST API',
           version: '1.0.0',
           description: 'Example docs',
         },
