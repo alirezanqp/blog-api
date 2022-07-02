@@ -22,12 +22,6 @@ export class UserEntity extends BaseEntity implements User {
   username: string;
 
   @Column()
-  name: string;
-
-  @Column()
-  lastName: string;
-
-  @Column()
   @IsNotEmpty()
   password: string;
 

@@ -1,13 +1,14 @@
 import bcrypt from 'bcrypt';
 import request from 'supertest';
-import { createConnection, getRepository } from 'typeorm';
-import App from '@/app';
-import { dbConnection } from '@databases';
-import { CreateUserDto } from '@dtos/users.dto';
-import AuthRoute from '@routes/auth.route';
+import { DataSource } from 'typeorm';
+import App from '../app';
+import { dbConnection } from '../databases/';
+import { CreateUserDto } from '../dtos/users.dto';
+import AuthRoute from '../routes/auth.route';
 
 beforeAll(async () => {
-  await createConnection(dbConnection);
+  const connection = new DataSource(dbConnection);
+  await connection.initialize();
 });
 
 afterAll(async () => {
@@ -19,12 +20,13 @@ describe('Testing Auth', () => {
     it('response should have the Create userData', async () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
+        username: 'test',
         password: 'q1w2e3r4!',
       };
 
       const authRoute = new AuthRoute();
       const users = authRoute.authController.authService.users;
-      const userRepository = getRepository(users);
+      const userRepository = DataSource.getRepository(users);
 
       userRepository.findOne = jest.fn().mockReturnValue(null);
       userRepository.save = jest.fn().mockReturnValue({
@@ -42,6 +44,7 @@ describe('Testing Auth', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
+        username: 'test',
         password: 'q1w2e3r4!',
       };
 

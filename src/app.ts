@@ -9,7 +9,7 @@ import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { DataSource } from 'typeorm';
-import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
+import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS, API_VERSION } from '@config';
 import { dbConnection } from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
@@ -66,7 +66,7 @@ class App {
 
   private initializeRoutes(routes: Routes[]) {
     routes.forEach(route => {
-      this.app.use('/', route.router);
+      this.app.use(`/api/${API_VERSION}/`, route.router);
     });
   }
 
@@ -77,6 +77,10 @@ class App {
           title: 'Blog REST API',
           version: '1.0.0',
           description: 'Example docs',
+          contact: {
+            name: 'Alireza Naghdipour',
+            email: 'alirezanqp@gmail.com',
+          },
         },
       },
       apis: ['swagger.yaml'],
