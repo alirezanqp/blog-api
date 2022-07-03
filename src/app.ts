@@ -1,5 +1,83 @@
-import {} from 'express';
+import express, { Router } from 'express';
+import { NODE_ENV, PORT, ORIGIN, CREDENTIALS, LOG_FORMAT } from '@config';
+import { AppDataSource } from '@databases'
+import cors from 'cors';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import morgan from 'morgan';
+import compression from 'compression';
+import cookieParser from 'cookie-parser';
+import { stream, logger } from '@utils/logger'
+import { Routes } from '@interfaces/routes.interface';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express'
+import errorMiddleware from './middlewares/error.middleware';
 
 class App {
+    public app: express.Application;
+    public env: string;
+    public port: number;
+
+    constructor(routes: Routes[]) {
+        this.app = express();
+        this.env = NODE_ENV || 'development';
+        this.port = +PORT;
+
+        this.connectToDatabase();
+        this.initialzeMiddlewares();
+        this.initialzeRoutes(routes);
+        this.initializeSwagger();
+        this.initialzeErrorHandler();
+
+    }
+
+    public listen() {
+        this.app.listen(this.port, () => {
+            logger.info(`Server running on port ${this.port}`);
+        });
+    }
+
+    public connectToDatabase() {
+        AppDataSource.initialize()
+    }
+
+    public initialzeMiddlewares() {
+        this.app.use(morgan(LOG_FORMAT, { stream }));
+        this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+        this.app.use(express.json());
+        this.app.use(hpp());
+        this.app.use(helmet())
+        this.app.use(compression());
+        this.app.use(express.urlencoded({ extended: false }));
+        this.app.use(cookieParser());
+    }
+
+    public initialzeRoutes(routes) {
+        routes.forEach(rout => {
+            this.app.use('/', rout.Router)
+        });
+    }
+
+    private initializeSwagger() {
+        const options = {
+          swaggerDefinition: {
+            info: {
+              title: 'REST API',
+              version: '1.0.0',
+              description: 'Example docs',
+            },
+          },
+          apis: ['swagger.yaml'],
+        };
     
+        const specs = swaggerJSDoc(options);
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+    }
+
+    private initialzeErrorHandler() {
+        this.app.use(errorMiddleware)
+    }
+
 }
+
+export default App;
