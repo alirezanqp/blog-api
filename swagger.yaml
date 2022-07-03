@@ -82,7 +82,7 @@ paths:
     put:
       tags:
       - users
-      summary: Update User By Id
+      summary: Update User By userId
       parameters:
       - name: id
         in: path
