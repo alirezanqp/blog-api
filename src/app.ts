@@ -84,6 +84,3 @@ class App {
 }
 
 export default App;
-function then(arg0: () => void) {
-  throw new Error('Function not implemented.');
-}
