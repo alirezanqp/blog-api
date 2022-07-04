@@ -1,0 +1,40 @@
+2022-07-04 17:23:51 info: =================================
+2022-07-04 17:23:51 info: ======= ENV: development =======
+2022-07-04 17:23:51 info: 🚀 App listening on the port 3000
+2022-07-04 17:23:51 info: =================================
+2022-07-04 17:23:51 info: > Database connected successfully
+2022-07-04 17:24:53 info: =================================
+2022-07-04 17:24:53 info: ======= ENV: development =======
+2022-07-04 17:24:53 info: 🚀 App listening on the port 3000
+2022-07-04 17:24:53 info: =================================
+2022-07-04 17:24:54 info: > Database connected successfully
+2022-07-04 17:25:04 info: [0mGET / [33m404[0m 30.960 ms - 139[0m
+2022-07-04 17:25:09 info: [0mGET /api-docs/ [36m304[0m 13.557 ms - -[0m
+2022-07-04 17:25:09 info: [0mGET /api-docs/swagger-ui.css [32m200[0m 9.459 ms - -[0m
+2022-07-04 17:25:09 info: [0mGET /api-docs/swagger-ui-init.js [32m200[0m 1.194 ms - -[0m
+2022-07-04 17:25:09 info: [0mGET /api-docs/swagger-ui-standalone-preset.js [32m200[0m 6.257 ms - -[0m
+2022-07-04 17:25:09 info: [0mGET /api-docs/swagger-ui-init.js [32m200[0m 1.411 ms - -[0m
+2022-07-04 17:25:09 info: [0mGET /api-docs/swagger-ui-standalone-preset.js [32m200[0m 17.357 ms - -[0m
+2022-07-04 17:25:09 info: [0mGET /api-docs/swagger-ui-bundle.js [32m200[0m 8.513 ms - -[0m
+2022-07-04 17:25:10 info: [0mGET /api-docs/favicon-32x32.png [36m304[0m 2.176 ms - -[0m
+2022-07-04 17:25:10 info: [0mGET /api-docs/swagger-ui-bundle.js [32m200[0m 1.857 ms - -[0m
+2022-07-04 17:25:54 info: =================================
+2022-07-04 17:25:54 info: ======= ENV: development =======
+2022-07-04 17:25:54 info: 🚀 App listening on the port 3000
+2022-07-04 17:25:54 info: =================================
+2022-07-04 17:25:54 info: > Database connected successfully
+2022-07-04 17:29:52 info: =================================
+2022-07-04 17:29:52 info: ======= ENV: development =======
+2022-07-04 17:29:52 info: 🚀 App listening on the port 3000
+2022-07-04 17:29:52 info: =================================
+2022-07-04 17:29:53 info: > Database connected successfully
+2022-07-04 17:30:03 info: =================================
+2022-07-04 17:30:03 info: ======= ENV: development =======
+2022-07-04 17:30:03 info: 🚀 App listening on the port 3000
+2022-07-04 17:30:03 info: =================================
+2022-07-04 17:30:04 info: > Database connected successfully
+2022-07-04 17:44:06 info: =================================
+2022-07-04 17:44:06 info: ======= ENV: development =======
+2022-07-04 17:44:06 info: 🚀 App listening on the port 3000
+2022-07-04 17:44:06 info: =================================
+2022-07-04 17:44:06 info: > Database connected successfully

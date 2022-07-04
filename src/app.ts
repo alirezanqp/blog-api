@@ -39,6 +39,10 @@ class App {
     });
   }
 
+  public getServer() {
+    return this.app;
+  }
+
   public connectToDatabase() {
     AppDataSource.initialize()
       .then(() => logger.info('> Database connected successfully'))

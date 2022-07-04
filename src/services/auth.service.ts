@@ -9,7 +9,7 @@ import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 class AuthService {
-  private userRepository = UserEntity;
+  public userRepository = UserEntity;
 
   public async signup(userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'اطلاعات کاربری خالی است');

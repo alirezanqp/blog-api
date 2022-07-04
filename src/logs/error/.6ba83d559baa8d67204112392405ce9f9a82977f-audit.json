@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": false,
+        "amount": 30
+    },
+    "auditLog": "/home/alirezanqp/Desktop/blog-api/src/logs/error/.6ba83d559baa8d67204112392405ce9f9a82977f-audit.json",
+    "files": [
+        {
+            "date": 1656939229497,
+            "name": "/home/alirezanqp/Desktop/blog-api/src/logs/error/2022-07-04.log",
+            "hash": "943f41dd7276aef8938f0a71fe89b04979b9f674cdf64703c326931d4343ba9d"
+        }
+    ],
+    "hashType": "sha256"
+}
