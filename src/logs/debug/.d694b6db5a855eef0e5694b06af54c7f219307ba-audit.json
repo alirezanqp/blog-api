@@ -6,9 +6,9 @@
     "auditLog": "/home/alirezanqp/Desktop/blog-api/src/logs/debug/.d694b6db5a855eef0e5694b06af54c7f219307ba-audit.json",
     "files": [
         {
-            "date": 1656939229495,
-            "name": "/home/alirezanqp/Desktop/blog-api/src/logs/debug/2022-07-04.log",
-            "hash": "15fc4ab2224dcf4f6c3778977c45a39cfff8b09a98d46ce49e53320c9ff34685"
+            "date": 1660120433438,
+            "name": "/home/alirezanqp/Desktop/blog-api/src/logs/debug/2022-08-10.log",
+            "hash": "e605e3ddccc5a50890c0b6519168915f378da1f24d10a0395f0f4864ad114be1"
         }
     ],
     "hashType": "sha256"

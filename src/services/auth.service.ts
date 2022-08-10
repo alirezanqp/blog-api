@@ -1,6 +1,6 @@
 import { SECRET_KEY } from '@/config';
 import { CreateUserDto } from '@/dtos/user.dto';
-import { UserEntity } from '@/entities/users.entitiy';
+import { UserEntity } from '@/entities/users.entity';
 import { DataStoredInToken, TokenData } from '@/interfaces/auth.interface';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
@@ -9,23 +9,21 @@ import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 class AuthService {
-  public userRepository = UserEntity;
-
   public async signup(userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'اطلاعات کاربری خالی است');
 
-    const user = await this.userRepository.findOne({ where: { email: userData.email } });
+    const user = await UserEntity.findOne({ where: { email: userData.email } });
     if (user) throw new HttpException(409, 'کاربری با این ایمیل قبلا ثبت شده است');
 
     const hashPassword = await bcrypt.hash(userData.password, 10);
-    const newUser: User = await this.userRepository.create({ ...userData, password: hashPassword }).save();
+    const newUser: User = await UserEntity.create({ ...userData, password: hashPassword }).save();
     return newUser;
   }
 
   public async signin(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
     if (isEmpty(userData)) throw new HttpException(400, 'اطلاعات کاربری خالی است');
 
-    const findUser = await this.userRepository.findOne({ where: { email: userData.email } });
+    const findUser = await UserEntity.findOne({ where: { email: userData.email } });
     if (!findUser) throw new HttpException(404, 'ایمیل یا رمز عبور اشتباه است');
 
     const isValid = await bcrypt.compare(userData.password, findUser.password);
