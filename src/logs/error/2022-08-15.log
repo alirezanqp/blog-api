@@ -1,0 +1,12 @@
+2022-08-15 23:41:11 error: uncaughtException: EIO: i/o error, write
+Error: EIO: i/o error, write
+    at writeSync (node:fs:932:3)
+    at SyncWriteStream._write (node:internal/fs/sync_write_stream:26:3)
+    at writeOrBuffer (node:internal/streams/writable:392:12)
+    at _write (node:internal/streams/writable:333:10)
+    at SyncWriteStream.Writable.write (node:internal/streams/writable:337:10)
+    at Console.log (/home/alirezanqp/Desktop/blog-api/node_modules/winston/lib/winston/transports/console.js:79:23)
+    at Console._write (/home/alirezanqp/Desktop/blog-api/node_modules/winston-transport/index.js:103:17)
+    at doWrite (/home/alirezanqp/Desktop/blog-api/node_modules/readable-stream/lib/_stream_writable.js:409:139)
+    at writeOrBuffer (/home/alirezanqp/Desktop/blog-api/node_modules/readable-stream/lib/_stream_writable.js:398:5)
+    at Console.Writable.write (/home/alirezanqp/Desktop/blog-api/node_modules/readable-stream/lib/_stream_writable.js:307:11)
