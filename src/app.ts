@@ -7,84 +7,75 @@ import hpp from 'hpp';
 import morgan from 'morgan';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import { stream, logger } from '@utils/logger';
-import { Routes } from '@interfaces/routes.interface';
+import { stream, logger } from '@/shared/utils/logger';
+import { Routes } from '@/shared/interfaces/routes.interface';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import errorMiddleware from './middlewares/error.middleware';
 
-class App {
-  public app: express.Application;
-  public env: string;
-  public port: string | number;
+const app = express();
+const env = NODE_ENV || 'development';
+const port = PORT || 3000;
 
-  constructor(routes: Routes[]) {
-    this.app = express();
-    this.env = NODE_ENV || 'development';
-    this.port = PORT || 3000;
+const connectToDatabase = () => {
+  AppDataSource.initialize()
+    .then(() => logger.info('> Database connected successfully'))
+    .catch(err => logger.error(err));
+};
 
-    this.env !== 'test' && this.connectToDatabase();
-    this.initialzeMiddlewares();
-    this.initialzeRoutes(routes);
-    this.initializeSwagger();
-    this.initialzeErrorHandler();
-  }
+const initialzeMiddlewares = () => {
+  app.use(morgan(LOG_FORMAT, { stream }));
+  app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+  app.use(express.json());
+  app.use(hpp());
+  app.use(helmet());
+  app.use(compression());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(cookieParser());
+};
 
-  public listen() {
-    this.app.listen(this.port, () => {
-      logger.info(`=================================`);
-      logger.info(`======= ENV: ${this.env} =======`);
-      logger.info(`🚀 App listening on the port ${this.port}`);
-      logger.info(`=================================`);
-    });
-  }
+const initialzeRoutes = routes => {
+  routes.forEach(route => {
+    app.use(`/api/${API_VERSION}/`, route.router);
+  });
+};
 
-  public getServer() {
-    return this.app;
-  }
-
-  public connectToDatabase() {
-    AppDataSource.initialize()
-      .then(() => logger.info('> Database connected successfully'))
-      .catch(err => logger.error(err));
-  }
-
-  public initialzeMiddlewares() {
-    this.app.use(morgan(LOG_FORMAT, { stream }));
-    this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
-    this.app.use(express.json());
-    this.app.use(hpp());
-    this.app.use(helmet());
-    this.app.use(compression());
-    this.app.use(express.urlencoded({ extended: false }));
-    this.app.use(cookieParser());
-  }
-
-  public initialzeRoutes(routes) {
-    routes.forEach(route => {
-      this.app.use(`/api/${API_VERSION}/`, route.router);
-    });
-  }
-
-  private initializeSwagger() {
-    const options = {
-      swaggerDefinition: {
-        info: {
-          title: 'REST API',
-          version: '1.0.0',
-          description: 'Example docs',
-        },
+const initializeSwagger = () => {
+  const options = {
+    swaggerDefinition: {
+      info: {
+        title: 'REST API',
+        version: '1.0.0',
+        description: 'Example docs',
       },
-      apis: ['swagger.yaml'],
-    };
+    },
+    apis: ['swagger.yaml'],
+  };
 
-    const specs = swaggerJSDoc(options);
-    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-  }
+  const specs = swaggerJSDoc(options);
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+};
 
-  private initialzeErrorHandler() {
-    this.app.use(errorMiddleware);
-  }
-}
+const initialzeErrorHandler = () => {
+  app.use(errorMiddleware);
+};
 
-export default App;
+const listen = (app) => {
+  app.listen(port, () => {
+    logger.info(`=================================`);
+    logger.info(`======= ENV: ${env} =======`);
+    logger.info(`🚀 App listening on the port ${port}`);
+    logger.info(`=================================`);
+  });
+};
+
+const createApp = routes => {
+  env !== 'test' && connectToDatabase();
+  initialzeMiddlewares();
+  initialzeRoutes(routes);
+  initializeSwagger();
+  initialzeErrorHandler();
+  return app;
+};
+
+export { createApp, listen };
