@@ -9,6 +9,21 @@
             "date": 1660590669214,
             "name": "/home/alirezanqp/Desktop/blog-api/src/logs/error/2022-08-15.log",
             "hash": "365604e0fd8b2085d422229b3694666d83a3aee8c4af80c62ff327a16a3349a5"
+        },
+        {
+            "date": 1660661371259,
+            "name": "/home/alirezanqp/Desktop/blog-api/src/logs/error/2022-08-16.log",
+            "hash": "daca087cd9d1058614891568f33fc94acc9cee1f1e896c8a6e61b3e7c0bd9fed"
+        },
+        {
+            "date": 1660747944758,
+            "name": "/home/alirezanqp/Desktop/blog-api/src/logs/error/2022-08-17.log",
+            "hash": "d55bda736e6874ef7364afb53ac2951c3b5512342b7568cc5358ac560e9f02f8"
+        },
+        {
+            "date": 1660996110896,
+            "name": "/home/alirezanqp/Desktop/blog-api/src/logs/error/2022-08-20.log",
+            "hash": "e99286dfc355fe367b5f9fc529798a93350ec3efa43b4708fe73306307321f28"
         }
     ],
     "hashType": "sha256"

@@ -1,5 +1,5 @@
-import IndexController from '@controllers/index.controller';
-import { Routes } from '@interfaces/routes.interface';
+import IndexController from '@/modules/index/index.controller';
+import { Routes } from '@/shared/interfaces/routes.interface';
 import { Router } from 'express';
 
 class IndexRoute implements Routes {
