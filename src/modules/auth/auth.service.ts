@@ -1,14 +1,15 @@
 import { SECRET_KEY } from '@/config';
 import { CreateUserDto } from '@/dtos/user.dto';
-import { UserEntity } from '@/entities/users.entity';
-import { DataStoredInToken, TokenData } from '@/interfaces/auth.interface';
+import { UserEntity } from '@/modules/user/users.entity';
+import { DataStoredInToken, TokenData } from '@/modules/auth/auth.interface';
 import { HttpException } from '@exceptions/HttpException';
-import { User } from '@interfaces/users.interface';
-import { isEmpty } from '@utils/util';
+import { User } from '@/modules/user/users.interface';
+import { isEmpty } from '@/shared/utils/util';
 import { sign } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 class AuthService {
+  [x: string]: any;
   public async signup(userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, 'اطلاعات کاربری خالی است');
 
