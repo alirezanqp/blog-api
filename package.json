@@ -30,7 +30,7 @@
     "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.0",
     "morgan": "^1.10.0",
-    "pg": "^8.8.0",
+    "pg": "^8.9.0",
     "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.6.0",
